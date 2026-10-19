@@ -21,7 +21,7 @@ create table if not exists public.tasks (
 
 create index if not exists tasks_owner_duedate_idx on public.tasks (owner_id, duedate);
 
-do $
+do $$
 begin
   if not exists (
     select 1
@@ -33,7 +33,7 @@ begin
     alter publication supabase_realtime add table public.tasks;
   end if;
 end
-$;
+$$;
 
 alter table public.tasks enable row level security;
 
